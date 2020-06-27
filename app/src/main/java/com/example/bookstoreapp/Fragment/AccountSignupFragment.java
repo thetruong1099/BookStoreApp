@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.bookstoreapp.R;
-import com.example.bookstoreapp.Service.Userservice;
+import com.example.bookstoreapp.Service.UserService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -122,7 +122,7 @@ public class AccountSignupFragment extends Fragment {
                 if (!TextUtils.isEmpty(edtpasswordsignup.getText().toString().trim()) && edtpasswordsignup.length() >= 8) {
                     if (!TextUtils.isEmpty(edtconfirmpassword.getText().toString().trim())) {
                         btnsignup.setEnabled(true);
-                        btnsignup.setBackground(getResources().getDrawable(R.drawable.duongvien_botron_buttun2, getActivity().getTheme()));
+                        btnsignup.setBackground(getResources().getDrawable(R.drawable.duongvien_botron_button2, getActivity().getTheme()));
                         btnsignup.setTextColor( Color.rgb(255, 255, 255));
 
                     }
@@ -144,7 +144,7 @@ public class AccountSignupFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     userID = firebaseAuth.getCurrentUser().getUid();
-                                    Userservice  userservice = new Userservice();
+                                    UserService userservice = new UserService();
                                     userservice.addUserInSignup( userID, email, fullname );
                                     setFragment(new AccountDetailFragment());
                                 }else{

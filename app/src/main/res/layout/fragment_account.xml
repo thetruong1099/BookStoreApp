@@ -14,7 +14,7 @@
         android:textSize="30dp"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:background="#f0932b"
+        android:background="@color/colorPrimary"
         android:text="Tài Khoản"/>
 
     <FrameLayout

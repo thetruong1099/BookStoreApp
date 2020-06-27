@@ -162,7 +162,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/duongvien_botron_buttun2"
+        android:background="@drawable/duongvien_botron_button2"
         android:text="Xác nhận"
         android:textColor="#ffffff"
         android:textAllCaps="false"

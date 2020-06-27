@@ -10,30 +10,33 @@
     <LinearLayout
         android:weightSum="10"
         android:orientation="horizontal"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnLogin"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="5"
-            android:background="#ffffff"
             android:text="ĐĂNG NHẬP"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"/>
 
         <Button
             android:id="@+id/btnSignup"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="5"
-            android:background="#ffffff"
             android:text="ĐĂNG KÝ"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"/>
     </LinearLayout>
 
     <FrameLayout

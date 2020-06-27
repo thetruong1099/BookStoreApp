@@ -23,6 +23,14 @@ public class ProfileDetailActivity extends AppCompatActivity {
         btndetailprofile = findViewById(R.id.btndetailprofile);
         btnchangpassword = findViewById(R.id.btnchangepassword);
 
+        btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btndetailprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

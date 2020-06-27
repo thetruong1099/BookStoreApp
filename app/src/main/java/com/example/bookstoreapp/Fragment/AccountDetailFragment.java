@@ -13,10 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.bookstoreapp.Activity.AddressManagerActivity;
 import com.example.bookstoreapp.Activity.ProfileDetailActivity;
+import com.example.bookstoreapp.Activity.ShoppingHistoryActivity;
 import com.example.bookstoreapp.Model.User;
 import com.example.bookstoreapp.R;
-import com.example.bookstoreapp.Service.Userservice;
+import com.example.bookstoreapp.Service.UserService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +37,7 @@ public class AccountDetailFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
-    private Userservice userservice;
+    private UserService userservice;
     private User user;
 
     public AccountDetailFragment() {
@@ -70,6 +72,23 @@ public class AccountDetailFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+
+        tvquanlydaichi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddressManagerActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        tvlichsumuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ShoppingHistoryActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
         btndangxuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +98,8 @@ public class AccountDetailFragment extends Fragment {
         });
         return view;
     }
+
+
 
     private void getdata() {
         String userID = firebaseAuth.getCurrentUser().getUid();

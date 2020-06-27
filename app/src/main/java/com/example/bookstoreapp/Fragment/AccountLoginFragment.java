@@ -128,7 +128,7 @@ public class AccountLoginFragment extends Fragment {
         if (!TextUtils.isEmpty(edtemaillogin.getText().toString().trim())) {
             if (!TextUtils.isEmpty(edtpassword.getText().toString().trim()) && edtpassword.length() >= 8) {
                 btnlogin.setEnabled(true);
-                btnlogin.setBackground(getResources().getDrawable(R.drawable.duongvien_botron_buttun2, getActivity().getTheme()));
+                btnlogin.setBackground(getResources().getDrawable(R.drawable.duongvien_botron_button2, getActivity().getTheme()));
                 btnlogin.setTextColor( Color.rgb(255, 255, 255));
             }
         }

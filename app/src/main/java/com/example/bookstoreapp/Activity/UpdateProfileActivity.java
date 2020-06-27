@@ -13,15 +13,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bookstoreapp.R;
-import com.example.bookstoreapp.Service.Userservice;
+import com.example.bookstoreapp.Service.UserService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Date;
 
 public class UpdateProfileActivity extends AppCompatActivity {
     private EditText tvfullname, tvemail, tvphone, tvbirthday;
@@ -93,7 +91,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if (cbwoman.isChecked()){
             sex = 0;
         }
-        Userservice userservice = new Userservice();
+        UserService userservice = new UserService();
         userservice.updateUser(userID, fullname, email, phone, birtday, sex);
     }
 

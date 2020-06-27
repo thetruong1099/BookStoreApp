@@ -129,15 +129,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:text="Sổ địa chỉ"
             android:textSize="20dp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvaddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="Quản lý địa chỉ"
             android:textSize="20sp"
@@ -171,15 +173,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:text="Lịch sử mua hàng"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvhistoryshopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="Xem thêm"
             android:textSize="20sp"
@@ -194,7 +198,8 @@
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/duongvien_botron_buttun2"
+        android:background="@drawable/duongvien_botron_button2"
+        android:textColor="#ffffff"
         android:text="Đăng xuất"
         android:textSize="20sp"
         android:textAllCaps="false"/>

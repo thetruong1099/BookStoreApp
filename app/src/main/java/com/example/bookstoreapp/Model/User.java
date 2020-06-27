@@ -1,6 +1,7 @@
 package com.example.bookstoreapp.Model;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private String id;
@@ -9,7 +10,7 @@ public class User {
     private String phone;
     private String birtday;
     private int sex;
-
+    private List<Address> address;
 
 
     public User() {
@@ -61,5 +62,13 @@ public class User {
 
     public void setSex(int sex) {
         this.sex = sex;
+    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
     }
 }

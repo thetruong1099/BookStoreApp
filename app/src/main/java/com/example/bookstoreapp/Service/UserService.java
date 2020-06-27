@@ -1,14 +1,25 @@
 package com.example.bookstoreapp.Service;
 
+import com.example.bookstoreapp.Model.Address;
 import com.example.bookstoreapp.Model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Userservice {
+import javax.annotation.Nullable;
+
+public class UserService {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
     public void addUserInSignup(String id, String email, String fullname){
@@ -27,5 +38,8 @@ public class Userservice {
         documentReference.update("phone",phone);
         documentReference.update("birthday",birthday);
         documentReference.update("sex",sex);
+    }
+
+    public void addnewaddress(String id,  Address address){
     }
 }
