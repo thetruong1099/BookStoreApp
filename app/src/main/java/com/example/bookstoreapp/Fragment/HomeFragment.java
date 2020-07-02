@@ -3,13 +3,19 @@ package com.example.bookstoreapp.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -39,6 +45,11 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+
+    //Search
+    private EditText edtSearch;
+    //Search
+
 
     //Banner Slider
     private BannerService bannerService;
@@ -75,6 +86,29 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate( R.layout.fragment_home , container , false );
+
+        //Search
+            edtSearch = view.findViewById(R.id.edtSearch);
+            edtSearch.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                            (i == KeyEvent.KEYCODE_ENTER)) {
+                        // Perform action on key press
+                        Bundle bundle = new Bundle();
+                        String searchKey = edtSearch.getText().toString().trim();
+                        bundle.putString("tuKhoa", searchKey);
+                        BookListFragment bookListFragment = new BookListFragment();
+                        bookListFragment.setArguments(bundle);
+                        setFragment(bookListFragment);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+
+        //Search
+
 
 
         //Banner Slider
@@ -183,5 +217,10 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+    }
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
     }
 }

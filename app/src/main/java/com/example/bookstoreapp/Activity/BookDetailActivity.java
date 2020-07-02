@@ -23,6 +23,7 @@ import com.example.bookstoreapp.R;
 import com.example.bookstoreapp.Service.BookService;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,19 +101,26 @@ public class BookDetailActivity extends AppCompatActivity {
         });
 
         status = false;
-        final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        btnMuaNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BookDetailActivity.this, MainActivity.class);
-                startActivity(intent);
-                if(userID!=null){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser!=null){
+            final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            btnMuaNgay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(BookDetailActivity.this, MainActivity.class);
+                    startActivity(intent);
                     setShoppingCart(userID);
-                }else {
+                }
+            });
+        }else {
+            btnMuaNgay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     Toast.makeText(BookDetailActivity.this, "Cần Đăng Nhập Để Mua Hàng", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+        }
+
 
     }
     private void getandsetIntenData() {
