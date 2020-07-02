@@ -51,6 +51,6 @@ public class AddAddressActivity extends AppCompatActivity {
         address.setHomeAddress(edthomeaddress.getText().toString());
         String userID = firebaseAuth.getCurrentUser().getUid();
         UserService userservice = new UserService();
-        userservice.addnewaddress(userID, address);
+      //  userservice.addnewaddress(userID, address);
     }
 }

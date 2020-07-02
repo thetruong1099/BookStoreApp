@@ -40,6 +40,4 @@ public class UserService {
         documentReference.update("sex",sex);
     }
 
-    public void addnewaddress(String id,  Address address){
-    }
 }

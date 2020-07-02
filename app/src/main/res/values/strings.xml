@@ -4,4 +4,6 @@
     <string name="nav_notification">Notification</string>
     <string name="nav_account">Account</string>
     <string name="nav_shopping_cart">Shopping Cart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

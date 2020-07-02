@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.bookstoreapp.Model.SliderModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,14 +20,14 @@ import static android.content.ContentValues.TAG;
 
 public class BannerService {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private List<String> bannnerlist = new ArrayList<String>();
+    private List<SliderModel> bannnerlist = new ArrayList<>();
     private boolean status = false;
 
     public boolean isStatus() {
         return status;
     }
 
-    public List<String> getBannnerlist() {
+    public List<SliderModel> getBannnerlist() {
         return bannnerlist;
     }
 
@@ -39,11 +40,11 @@ public class BannerService {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Log.e(TAG, "thanh cong");
 //                    System.out.println(documentSnapshot.getString("1"));
-                    bannnerlist.add(documentSnapshot.getString("1"));
-                    bannnerlist.add(documentSnapshot.getString("2"));
-                    bannnerlist.add(documentSnapshot.getString("3"));
-                    bannnerlist.add(documentSnapshot.getString("4"));
-                    bannnerlist.add(documentSnapshot.getString("5"));
+                    bannnerlist.add(new SliderModel(documentSnapshot.getString("1")));
+                    bannnerlist.add(new SliderModel(documentSnapshot.getString("2")));
+                    bannnerlist.add(new SliderModel(documentSnapshot.getString("3")));
+                    bannnerlist.add(new SliderModel(documentSnapshot.getString("4")));
+                    bannnerlist.add(new SliderModel(documentSnapshot.getString("5")));
                     status = true;
 //                    System.out.println(bannnerlist.size());
                 }
@@ -53,7 +54,7 @@ public class BannerService {
                     Log.e(TAG,"that bai");
                 }
         });
-        System.out.println("size"+bannnerlist.size());
+//        System.out.println("size"+bannnerlist.size());
     }
 
 }

@@ -6,4 +6,5 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorred">#EA2027</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorGrey">#F5F5F5</color>
 </resources>

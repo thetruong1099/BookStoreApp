@@ -5,9 +5,9 @@ public class Address {
     private String phone;
     private String nation;
     private String city;
-    private String District;
-    private String Commune;
-    private String HomeAddress;
+    private String district;
+    private String commune;
+    private String homeAddress;
 
     public Address() {
     }
@@ -45,26 +45,26 @@ public class Address {
     }
 
     public String getDistrict() {
-        return District;
+        return district;
     }
 
     public void setDistrict(String district) {
-        District = district;
+        this.district = district;
     }
 
     public String getCommune() {
-        return Commune;
+        return commune;
     }
 
     public void setCommune(String commune) {
-        Commune = commune;
+        this.commune = commune;
     }
 
     public String getHomeAddress() {
-        return HomeAddress;
+        return homeAddress;
     }
 
     public void setHomeAddress(String homeAddress) {
-        HomeAddress = homeAddress;
+        this.homeAddress = homeAddress;
     }
 }
