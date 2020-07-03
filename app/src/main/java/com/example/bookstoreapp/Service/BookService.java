@@ -23,7 +23,6 @@ import static android.content.ContentValues.TAG;
 
 public class BookService {
     private List<Book> bookBestSaleList = new ArrayList<>();
-    private List<Book> bestBookList = new ArrayList<>();
     private boolean statusbestsale = false;
 
 
@@ -60,5 +59,9 @@ public class BookService {
                         }
                     }
                 });
+    }
+
+    public void updateDiemDanhGia(String id, int diemDanhGia){
+        FirebaseFirestore.getInstance().collection("books").document(id).update("diemDanhGia", diemDanhGia);
     }
 }

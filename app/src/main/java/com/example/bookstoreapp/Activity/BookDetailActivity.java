@@ -11,9 +11,11 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.opencensus.tags.Tag;
+
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView ivAnhBiaSachDetail;
     private TextView tvTenSachDetail;
@@ -52,10 +56,14 @@ public class BookDetailActivity extends AppCompatActivity {
     private ImageView ivTangDetail;
     private Button btnMuaNgay;
     private Button btnThemVaoGioHang;
+    private Button btnGuiDanhGia;
+    private RatingBar ratingBar;
 
     String id, anh, tenSach, giamGia, giaGoc,giaBan;
     int soLuong = 1;
-
+    int diemDanhGia = 0;
+    int diemDanhGia1 = 0;
+    float myRating = 0;
 
     private BookService bookService;
     private Book book;
@@ -84,11 +92,23 @@ public class BookDetailActivity extends AppCompatActivity {
         ivTangDetail = findViewById(R.id.ivTangDetail);
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
         btnThemVaoGioHang = findViewById(R.id.btnThemGioHang);
+        btnGuiDanhGia = findViewById(R.id.btnGuiDanhGiaBookDetail);
+        ratingBar = findViewById(R.id.ratingBar);
+
+
+
+
 
         getandsetIntenData();
         setDataDetail();
 
+        /////////////////////
+        setDiemDanhGia();
 
+
+
+
+        ////////////////
         tvSoLuongDetail.setText(String.valueOf(soLuong));
         ivTangDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +142,7 @@ public class BookDetailActivity extends AppCompatActivity {
                     setShoppingCart(userID);
                 }
             });
+            status = true;
         }else {
             btnMuaNgay.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -135,6 +156,7 @@ public class BookDetailActivity extends AppCompatActivity {
                     Toast.makeText(BookDetailActivity.this, "Cần Đăng Nhập Để Mua Hàng", Toast.LENGTH_SHORT).show();
                 }
             });
+            status = false;
         }
 
 
@@ -196,13 +218,15 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 book = documentSnapshot.toObject(Book.class);
-                tvDiemDanhGiaDeatail.setText(String.valueOf(book.getDiemDanhGia())+ "điểm");
+                tvDiemDanhGiaDeatail.setText(String.valueOf(book.getDiemDanhGia())+ " điểm");
                 tvMaSachDetail.setText(id);
                 tvTacGiaDetail.setText(book.getTacGia());
                 tvNhaCungCapDetail.setText(book.getNhaCungCap());
                 tvNhaXuatBanDetail.setText(book.getNhaXuatBan());
                 tvNamXuatDetail.setText(String.valueOf(book.getNamXuatBan()));
                 tvMoTaDetail.setText(book.getMoTa());
+
+                diemDanhGia = book.getDiemDanhGia();
             }
         });
     }
@@ -217,4 +241,38 @@ public class BookDetailActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection( "users" ).document(userID).collection("listBookSC").document(id).set(bookSC);
     }
 
+    private void setDiemDanhGia(){
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                myRating = ratingBar.getRating();
+                diemDanhGia1 = (int) (diemDanhGia + myRating);
+                setGuiDanhGia();
+            }
+
+        });
+
+    }
+    private void setGuiDanhGia(){
+        bookService = new BookService();
+        if(status){
+            btnGuiDanhGia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tvDiemDanhGiaDeatail.setText(String.valueOf(diemDanhGia1) + " điểm");
+                    bookService.updateDiemDanhGia(id,diemDanhGia1);
+                    Toast.makeText(BookDetailActivity.this, "Đã gửi điểm đánh giá", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else {
+            btnGuiDanhGia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(BookDetailActivity.this, "Cần Đăng Nhập Để Mua Hàng", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
 }

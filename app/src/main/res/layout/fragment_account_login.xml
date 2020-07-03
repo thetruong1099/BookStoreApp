@@ -54,7 +54,7 @@
         android:inputType="textPassword"/>
 
     <TextView
-        android:id="@+id/edtForgetPass"
+        android:id="@+id/tvForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AccountLoginFragment extends Fragment {
     private EditText edtemaillogin, edtpassword;
     private Button btnlogin, btnloginbyfacebook;
+    private TextView tvForgetPassword;
     private AccountDetailFragment accountDetailFragment;
 
     private FirebaseAuth firebaseAuth;
@@ -47,6 +49,16 @@ public class AccountLoginFragment extends Fragment {
         edtpassword = view.findViewById(R.id.edtPasswordLogin);
         btnlogin = view.findViewById(R.id.btnLogin2);
  //       btnloginbyfacebook = view.findViewById(R.id.btnLoginFacebook);
+
+        tvForgetPassword = view.findViewById(R.id.tvForgetPassword);
+
+        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment1(new ChangeAccountFragment());
+            }
+        });
+
         accountDetailFragment = new AccountDetailFragment();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -93,6 +105,8 @@ public class AccountLoginFragment extends Fragment {
         return view;
     }
 
+
+
     private void checkEmailandPassword() {
         if (edtemaillogin.getText().toString().matches(emailPattern)) {
             if (edtpassword.length() >= 8) {
@@ -132,5 +146,11 @@ public class AccountLoginFragment extends Fragment {
                 btnlogin.setTextColor( Color.rgb(255, 255, 255));
             }
         }
+    }
+
+    private void setFragment1(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
     }
 }
