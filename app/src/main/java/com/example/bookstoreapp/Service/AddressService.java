@@ -52,4 +52,8 @@ public class AddressService {
                     }
                 });
     }
+
+    public void addAddress(String userID, Address address){
+        FirebaseFirestore.getInstance().collection("users").document(userID).collection("address").add(address);
+    }
 }

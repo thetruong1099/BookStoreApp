@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ public class BookDetailActivity extends AppCompatActivity {
     private TextView tvSoLuongDetail;
     private ImageView ivTangDetail;
     private Button btnMuaNgay;
+    private Button btnThemVaoGioHang;
 
     String id, anh, tenSach, giamGia, giaGoc,giaBan;
     int soLuong = 1;
@@ -80,7 +83,7 @@ public class BookDetailActivity extends AppCompatActivity {
         tvSoLuongDetail = findViewById(R.id.tvSoLuongDetail);
         ivTangDetail = findViewById(R.id.ivTangDetail);
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
-
+        btnThemVaoGioHang = findViewById(R.id.btnThemGioHang);
 
         getandsetIntenData();
         setDataDetail();
@@ -104,6 +107,13 @@ public class BookDetailActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser!=null){
             final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showAlerDialog();
+                    setShoppingCart(userID);
+                }
+            });
             btnMuaNgay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -119,10 +129,31 @@ public class BookDetailActivity extends AppCompatActivity {
                     Toast.makeText(BookDetailActivity.this, "Cần Đăng Nhập Để Mua Hàng", Toast.LENGTH_SHORT).show();
                 }
             });
+            btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(BookDetailActivity.this, "Cần Đăng Nhập Để Mua Hàng", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
 
     }
+
+    private void showAlerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BookDetailActivity.this);
+        builder.setMessage("Thêm vào giỏ Hàng thành công");
+        builder.setCancelable(false);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private void getandsetIntenData() {
         //get Data
         id = getIntent().getStringExtra("id");
@@ -146,6 +177,7 @@ public class BookDetailActivity extends AppCompatActivity {
         soLuong++;
         tvSoLuongDetail.setText(String.valueOf(soLuong));
     }
+
     private void giamSoLuong(){
         soLuong--;
         if(soLuong>0){

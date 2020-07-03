@@ -66,7 +66,7 @@ public class OrderFragment extends Fragment {
     private ShoppingCartService shoppingCartService;
     private boolean status = false;
     private int statusPhuongThucVanChuyenTC = 0;
-    private int statusPhuongThucVanChuyenN =1;
+    private int statusPhuongThucVanChuyenN =0;
 
     private AddressService addressService;
     private RecyclerView orderAddressPayRecyclerView;
@@ -231,7 +231,7 @@ public class OrderFragment extends Fragment {
     }
 
     private boolean checkstatus(){
-        if (diaChi != null && (statusPhuongThucVanChuyenTC == 1 || statusPhuongThucVanChuyenTC == 1)){
+        if (diaChi != null && (statusPhuongThucVanChuyenTC == 1 || statusPhuongThucVanChuyenN == 1)){
             status = true;
         }
         return status;

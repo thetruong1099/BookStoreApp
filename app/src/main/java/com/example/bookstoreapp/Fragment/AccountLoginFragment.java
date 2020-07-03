@@ -46,7 +46,7 @@ public class AccountLoginFragment extends Fragment {
         edtemaillogin = view.findViewById(R.id.edtEmailLogin);
         edtpassword = view.findViewById(R.id.edtPasswordLogin);
         btnlogin = view.findViewById(R.id.btnLogin2);
-        btnloginbyfacebook = view.findViewById(R.id.btnLoginFacebook);
+ //       btnloginbyfacebook = view.findViewById(R.id.btnLoginFacebook);
         accountDetailFragment = new AccountDetailFragment();
 
         firebaseAuth = FirebaseAuth.getInstance();

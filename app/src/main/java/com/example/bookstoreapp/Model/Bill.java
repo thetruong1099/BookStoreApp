@@ -3,6 +3,7 @@ package com.example.bookstoreapp.Model;
 import java.util.ArrayList;
 
 public class Bill {
+    private String id;
     private String fullName;
     private String address;
     private String phone;
@@ -11,6 +12,14 @@ public class Bill {
     private ArrayList<ShoppingCard> sachDaMua;
 
     public Bill() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFullName() {

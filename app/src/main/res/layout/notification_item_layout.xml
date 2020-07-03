@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tiếp Nhận Đơn Hàng"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack" />
+
+    <TextView
+        android:id="@+id/tvMaDonHangNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Mã Đơn Hàng - 1111111111"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/tvNamePhoneNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Vũ Thế Trưởng - 1111111111"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/tvAddressNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PTIT, Hà Đông, Hà Nội, Việt Nam"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
+
+
+</LinearLayout>
