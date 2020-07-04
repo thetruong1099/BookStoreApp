@@ -5,10 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,18 +35,19 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class BookListFragment extends Fragment {
+public class BookListSearchFragment extends Fragment {
 
-    private ImageView ivBackToHomeFragmentFromBookListFragmentCategory;
-    private TextView tvTheLoai;
+    private ImageView ivBackToHomeFragmentFromBookListFragment;
+    private TextView edtSearchBookList;
+    private String searchKey;
 
-    private RecyclerView bookListRecyclerViewCategory;
+    //bookList
+    private RecyclerView bookListRecyclerViewSearch;
     private List<Book> bookList;
     private BookAdapter bookAdapter;
+    //bookList
 
-    private String theLoai;
-
-    public BookListFragment() {
+    public BookListSearchFragment() {
         // Required empty public constructor
     }
 
@@ -52,37 +55,53 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_book_list2, container, false);
+        View view =  inflater.inflate(R.layout.fragment_book_list, container, false);
 
+        ivBackToHomeFragmentFromBookListFragment = view.findViewById(R.id.ivBackToHomeFragmentFromBookListFragment);
+        edtSearchBookList = view.findViewById(R.id.edtSearchBookList);
 
-        ivBackToHomeFragmentFromBookListFragmentCategory = view.findViewById(R.id.ivBackToHomeFragmentFromBookListFragmentCategory);
-        tvTheLoai = view.findViewById(R.id.tvTheLoai);
-        getDataFrament();
-
-        bookListRecyclerViewCategory = view.findViewById(R.id.bookListRecyclerViewCategory);
-        setBookListRecyclerViewSearch(theLoai);
-
-        ivBackToHomeFragmentFromBookListFragmentCategory.setOnClickListener(new View.OnClickListener() {
+        ivBackToHomeFragmentFromBookListFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new CategoryFragment());
+                setFragment(new HomeFragment());
             }
         });
+
+
+        getDataFrament();
+
+        bookListRecyclerViewSearch = view.findViewById(R.id.bookListRecyclerViewSearch);
+        setBookListRecyclerViewSearch(searchKey);
+
+
+
+        edtSearchBookList.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    setBookListRecyclerViewSearch(edtSearchBookList.getText().toString().trim());
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return view;
     }
 
 
-
     private void getDataFrament() {
         Bundle bundle = this.getArguments();
-        theLoai = bundle.getString("theLoai");
-        tvTheLoai.setText(theLoai);
+        searchKey = bundle.getString("tuKhoa");
+        edtSearchBookList.setText(searchKey);
     }
 
-    private void setBookListRecyclerViewSearch(String theloai) {
+    private void setBookListRecyclerViewSearch(String tuKhoa) {
         bookList = new ArrayList<>();
         FirebaseFirestore.getInstance().collection("books")
-                .whereEqualTo("theLoai", theloai)
+                .whereGreaterThan("tenSach",tuKhoa)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -94,13 +113,14 @@ public class BookListFragment extends Fragment {
                                 book.setAnh(documentSnapshot.getString("anh"));
                                 book.setGiamGia(Math.toIntExact(documentSnapshot.getLong("giamGia")));
                                 book.setTenSach(documentSnapshot.getString("tenSach"));
+                                book.setDiemDanhGia(Math.toIntExact(documentSnapshot.getLong("diemDanhGia")));
                                 book.setGiaGoc(Math.toIntExact(documentSnapshot.getLong("giaGoc")));
                                 bookList.add(book);
                             }
                             bookAdapter = new BookAdapter(bookList,getContext());
                             StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-                            bookListRecyclerViewCategory.setLayoutManager(layoutManager);
-                            bookListRecyclerViewCategory.setAdapter(bookAdapter);
+                            bookListRecyclerViewSearch.setLayoutManager(layoutManager);
+                            bookListRecyclerViewSearch.setAdapter(bookAdapter);
                         }
                         else {
                             Log.e(TAG, "Lỗi không tìm thấy");
@@ -108,8 +128,6 @@ public class BookListFragment extends Fragment {
                     }
                 });
     }
-
-
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);

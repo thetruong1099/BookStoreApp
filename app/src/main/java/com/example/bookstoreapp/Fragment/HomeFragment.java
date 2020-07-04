@@ -1,17 +1,14 @@
 package com.example.bookstoreapp.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,6 +42,13 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+
+    //Menu List Book
+    private ImageView ivMenuListBook;
+
+
+    //Menu List Book
+
 
     //Search
     private EditText edtSearch;
@@ -87,6 +91,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate( R.layout.fragment_home , container , false );
 
+        //Menu List Book
+        ivMenuListBook = view.findViewById(R.id.ivMenuListBook);
+        ivMenuListBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new CategoryFragment());
+            }
+        });
+
+
         //Search
             edtSearch = view.findViewById(R.id.edtSearch);
             edtSearch.setOnKeyListener(new View.OnKeyListener() {
@@ -98,9 +112,9 @@ public class HomeFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         String searchKey = edtSearch.getText().toString().trim();
                         bundle.putString("tuKhoa", searchKey);
-                        BookListFragment bookListFragment = new BookListFragment();
-                        bookListFragment.setArguments(bundle);
-                        setFragment(bookListFragment);
+                        BookListSearchFragment bookListSearchFragment = new BookListSearchFragment();
+                        bookListSearchFragment.setArguments(bundle);
+                        setFragment(bookListSearchFragment);
                         return true;
                     }
                     return false;
