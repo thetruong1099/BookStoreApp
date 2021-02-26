@@ -118,7 +118,6 @@ public class ShoppingCartFragment extends Fragment {
                                 Toast.makeText(getActivity(),"Cần Mua Sách", Toast.LENGTH_SHORT).show();
                             }
 
-
                         }
                         else {
                             Log.d(TAG, "Lỗi Không Lấy được giá trị.");
