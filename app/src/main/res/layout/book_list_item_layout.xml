@@ -5,7 +5,7 @@
     android:id="@+id/bookListItemLayout"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="10dp"
     android:background="@drawable/slider_background"
     android:elevation="3dp">
 
